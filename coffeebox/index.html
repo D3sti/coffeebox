@@ -30,26 +30,27 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="emailInput">Coffee Order</label>
+                        <label for="emailInput">Email</label>
                         <input id="emailInput" type="email" class="form-control" name="email" placeholder="dr@who.com">
                     </div>
 
                     <div class="form-group">
+                        <label for="cupSize">Cup size</label>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="size" value="short">
+                                <input type="radio" id="cupSize" name="size" value="short">
                                 Short
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="size" value="tall" checked>
+                                <input type="radio" id="cupSize" name="size" value="tall" checked>
                                 Tall
                             </label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="size" value="grande">
+                                <input type="radio" id="cupSize" name="size" value="grande">
                                 Grande
                             </label>
                         </div>
@@ -66,13 +67,21 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="strenghtLevel">Caffeine Rating</label>
+                        <input id="strenghtLevel" type="range" class="form-control" name="strenght" value="30"> 
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="reset" class="btn btn-secondary">Reset</button>
+
                 </form>
             </div>
         </div>
     </section>
 
     <footer>
-        <p> --- footer ---</p>
+        
     </footer>
 	
     <!--Add Bootstrap / JQUERY links -->
