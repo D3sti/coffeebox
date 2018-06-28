@@ -20,6 +20,56 @@
         <h1>Coffee Box</h1>
     </header>
 
+    <section>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form data-coffee-order="form">
+                    <div class="form-group">
+                        <label for="coffeeOrder">Coffee Order</label>
+                        <input id="coffeeOrder" class="form-control" name="coffee" autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="emailInput">Coffee Order</label>
+                        <input id="emailInput" type="email" class="form-control" name="email" placeholder="dr@who.com">
+                    </div>
+
+                    <div class="form-group">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="size" value="short">
+                                Short
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="size" value="tall" checked>
+                                Tall
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="size" value="grande">
+                                Grande
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="flavorShot">Flavor Shot</label>
+                        <select id="flavorShot" class="form-control" name="flavor">
+                            <option value="" selected>None</option>
+                            <option value="caramel">Caramel</option>
+                            <option value="vanilla">Vanilla</option>
+                            <option value="almond">Almond</option>
+                            <option value="mocha">Mocha</option>
+                        </select>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </section>
 
     <footer>
         <p> --- footer ---</p>
