@@ -1,0 +1,24 @@
+{
+  "name": "coffeebox",
+  "version": "1.0.0",
+  "description": "WIFI Mobile Web App Developer - Final project: Small foodtruck order overlay for coffee or tea.",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D3sti/coffeebox.git"
+  },
+  "author": "AMB",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/D3sti/coffeebox/issues"
+  },
+  "homepage": "https://github.com/D3sti/coffeebox#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "browser-sync": "^2.24.5",
+    "jquery": "^3.3.1"
+  }
+}
