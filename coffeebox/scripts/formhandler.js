@@ -27,11 +27,14 @@
     }
 
 
+
+
+
     //Function callback
     // >> extFunc(inputData) need a parameter to get the input data to the truck instance amd
     // can call the createOrder function
     FormHandler.prototype.addSubmitHandler = function(extFunc){
-        console.log("Setting submit handler (callback) for the form");
+        console.log("Add submit handler (callback) for the form");
         
         this.$formElement.on("submit", function (event){
             event.preventDefault(); //>> does not take the user away from the main page
@@ -46,10 +49,17 @@
             if (extFunc) {
                 console.log(">> addSubmitHandler: extFunc is provided and will be executed");
                 extFunc(inputData);
+            }else{
+                console.log(">> addSubmitHandler: extFunc is not provided - Submit callback is not available!");
             }
-
+            
+            //Reset the form elements
+            this.reset();
+            this.elements[0].focus();
         })
     };
+
+
 
     App.FormHandler = FormHandler;
     window.App = App;

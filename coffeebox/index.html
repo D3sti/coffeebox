@@ -15,7 +15,7 @@
 
     <!-- Browser Tab header -->
     <title>Coffee box</title>
-    
+
 </head>
 <body class="container">
 
@@ -57,6 +57,12 @@
                                 Grande
                             </label>
                         </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" id="cupSize" name="size" value="coffzilla">
+                                CoffZilla
+                            </label>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -71,8 +77,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="strenghtLevel">Caffeine Rating</label>
-                        <input id="strenghtLevel" type="range" class="form-control" name="strenght" value="30"> 
+                        <label for="strenghtLevel">Caffeine Rating: </label>
+                        <input class="form-control" type="range" id="strenghtLevel" name="strenght" min="0" max="100" value="30"> 
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>

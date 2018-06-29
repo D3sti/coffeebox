@@ -22,10 +22,10 @@
 
     //Create order
     Truck.prototype.createOrder = function(order){
-        console.log("Adding order " + order.coffee + " for " + order.emailAddress);
+        console.log("Adding order " + order.coffee + " for " + order.email);
 
         //Add drink to datastore object
-        this.datastore.add(order.emailAddress, order);
+        this.datastore.add(order.email, order);
     };
 
 
