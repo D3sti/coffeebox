@@ -7,8 +7,9 @@
 * [Bootstrap](https://getbootstrap.com/)
 * [Browser-Sync](https://www.browsersync.io/)
 
+---
 
-### Pre-Step
+## Pre-Step
 
 Initialize NodePackageManager
 
@@ -16,19 +17,40 @@ Initialize NodePackageManager
 npm init
 ```
 
-### JQuery
+Clone remote git-repository
+
+```bash
+git clone https://github.com/D3sti/coffeebox.git
+```
+
+Pull the last revision of the git-repository
+
+```bash
+git pull origin master
+```
+
+After code commits, they code should be pushed up to the remote git-repository
+
+```bash
+git push origin master
+```
+
+---
+
+## JQuery
 
 ```bash
 npm install jquery --save
 ```
+---
 
-### Bootstrap
+## Bootstrap
 
 ```bash
 npm install bootstrap --save
 ```
-
-### Browser-Sync
+---
+## Browser-Sync
 
 
 Install browser-sync global. Open your terminal and run the following command:
@@ -65,3 +87,5 @@ The server instance will open your standard browser automatically and write some
 ```
 
 **Cool Feature**: If you modify a file and save your changes, the browser will be automatically updated :)
+
+---
