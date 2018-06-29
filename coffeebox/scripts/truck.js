@@ -2,6 +2,8 @@
 (function(window){
     'use strict'
 
+    console.log(">> truck.js fired << ");
+
     //IIFE Code goes here ;)
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
@@ -15,7 +17,7 @@
 
     /* order Properties
     
-        -emailAddress [string]
+        -email [string]
         -coffee [string]
 
     */

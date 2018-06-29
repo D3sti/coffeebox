@@ -3,6 +3,8 @@
 (function(window){
     'use strict'
 
+    console.log(">> datastore.js fired << ");
+
     //IIFE Code goes here ;)
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
