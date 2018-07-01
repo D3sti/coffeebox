@@ -1,5 +1,7 @@
 # Coffee-Box Project
 
+WIFI - Project based on JavaScript and Bootstrap.
+(Pull-Requests will be ignored)
 
 ## NPM Packages
 
