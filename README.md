@@ -29,7 +29,7 @@ Pull the last revision of the git-repository
 git pull origin master
 ```
 
-After code commits, they code should be pushed up to the remote git-repository
+After code commits, the code should be pushed up to the remote git-repository
 
 ```bash
 git push origin master
@@ -59,7 +59,7 @@ Install browser-sync global. Open your terminal and run the following command:
 npm install -g browser-sync
 ```
 
-You have to redirect to the coffeebox folder, where the index.html is located. Otherwise the upcomming browser-sync command throws an error!
+You have to redirect to the coffeebox folder, where the index.html is located. Otherwise the upcomming browser-sync command throws an error! (could not find html* files)
 
 ```bash
  D:\<yourdirectorypath> cd .\coffeebox\
@@ -86,6 +86,6 @@ The server instance will open your standard browser automatically and write some
 
 ```
 
-**Cool Feature**: If you modify a file and save your changes, the browser will be automatically updated :)
+**Cool Feature**: If you modify a file and save your changes locally, the browser will be updated on the fly :)
 
 ---
