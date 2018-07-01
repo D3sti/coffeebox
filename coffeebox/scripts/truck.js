@@ -4,9 +4,22 @@
 
     console.log(">> truck.js fired << ");
 
-    //IIFE Code goes here ;)
+    /*IIFE Code goes here (IIFE -- Immediately-invoked Function Expression)
+        
+        A IIFE always creates a "Scope" and variables and functions are not visible from outside the scope
+        Outcome --> like a private scope / encapsulation !! Best Practice !!
+
+        // >> IMPORTANT >> 
+        // an outside defined variable with the same name definition will be "overruled" by the IIFE internal variable, which has the same name !!
+
+        (function () {
+            //...
+        })();
+
+    */
+
     //window will be injected as parameter
-    var App = window.App || {}; // {} == new object
+    var App = window.App || {}; // {} == new object()
 
     function Truck(truckId, datastore){
 
@@ -59,15 +72,15 @@
         }.bind(this)); 
         
         /*
-        //Passing the current 'Truck' object (this) as the owner object callback-fnc of that anonymous function!!
-        // Otherwise the inner "anonymous" function has an undefined 'owner' object callback-fnc as default!!
-        //The keyword 'bind' modifies the anonymous func and return it with the binded object 'this' as callback-fnc
-        
-        //Foreach provide a second parameter also for the callback function:
+            Passing the current 'Truck' object (this) as the owner object callback-fnc of that anonymous function!!
+            Otherwise the inner "anonymous" function has an undefined 'owner' object callback-fnc as default!! --> ERROR on bind() call
+            The keyword 'bind' modifies the anonymous func and return it with the binded object 'this' as callback-fnc
+            
+            >> Foreach provide a second parameter also for the callback function! <<
 
-        customerIdArray.forEach(function(id){
-            console.log(this.datastore.get(id)); 
-        }, this); <<<---- foreach / second parameter for callback-fnc
+                customerIdArray.forEach(function(id){
+                    console.log(this.datastore.get(id)); 
+                }, this); <<<---- foreach / second parameter for callback-fnc
         */
     };
 

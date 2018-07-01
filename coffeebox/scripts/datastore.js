@@ -5,7 +5,20 @@
 
     console.log(">> datastore.js fired << ");
 
-    //IIFE Code goes here ;)
+    /*IIFE Code goes here (IIFE -- Immediately-invoked Function Expression)
+        
+        A IIFE always creates a "Scope" and variables and functions are not visible from outside the scope
+        Outcome --> like a private scope / encapsulation !! Best Practice !!
+
+        // >> IMPORTANT >> 
+        // an outside defined variable with the same name definition will be "overruled" by the IIFE internal variable, which has the same name !!
+
+        (function () {
+            //...
+        })();
+
+    */
+
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
 
