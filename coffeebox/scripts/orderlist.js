@@ -19,8 +19,8 @@
 
     */
    
-    var ORDERITEM_SELECTOR='[data-coffee-order="checkbox"]';
-
+    //var ORDERITEM_SELECTOR='[data-coffee-order="checkbox"]';
+    var ORDERITEM_SELECTOR='[data-coffee-order="checklist"]';
 
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
@@ -48,7 +48,7 @@
     OrderList.prototype.addOrderItem = function (coffeeOrder){
 
         //Remove existing order item
-        this.removeOrderItem(coffeeOrder.email)
+        this.removeOrderItem(coffeeOrder.emailAddress)
 
         //Create new instance of a order item
         var orderItem = new OrderItem(coffeeOrder);
@@ -108,7 +108,7 @@
 
         var $checkbox = $('<input></input>', {
             type: 'checkbox',
-            value: coffeeOrder.email
+            value: coffeeOrder.emailAddress
         })
 
         var description = coffeeOrder.size + ' ';
@@ -117,7 +117,7 @@
         }
 
         description += coffeeOrder.coffee + ' ';
-        description += ' (' + coffeeOrder.email + ')';
+        description += ' (' + coffeeOrder.emailAddress + ')';
         description += ' [' + coffeeOrder.strenght + 'x]';
 
         //Append all variable fields together (inner - out)

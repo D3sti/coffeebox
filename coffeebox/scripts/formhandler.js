@@ -73,11 +73,31 @@
     };
 
 
+    FormHandler.prototype.addInputHandler = function(fn){
+        console.log('Setting input handler for form');
+        this.$formElement.on('input', '[name="emailAddress"]', function (event){
+            var emailAddress = event.target.value;
+            //Execute function 'fn'
+            console.log("isCompanyEmail Validation: " + fn(emailAddress));
+            var message = "";
+            if (fn(emailAddress)) {
+                event.target.setCustomValidity("");
+            }else{
+                message=emailAddress + " is not an authorized email address!";
+                event.target.setCustomValidity(message);
+            }
+
+        })
+    }
+
     FormHandler.prototype.addOnChangeListenerHandler = function(extFunc){
         //console.log("Add submit handler (callback) for the form");
         
         this.$formElement.on("change input", function (event){
-            event.preventDefault(); //>> does not take the user away from the main page
+
+            //>> does not take the user away from the main page
+            //>> blocks the browser from sending a request to the server
+            event.preventDefault(); 
 
             var inputData = {};
             $(this).serializeArray().forEach(item => {

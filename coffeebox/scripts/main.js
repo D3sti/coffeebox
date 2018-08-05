@@ -7,20 +7,37 @@
     var FORM_SELECTOR='[data-coffee-order="form"]';
     var ORDERLIST_SELECTOR='[data-coffee-order="checklist"]';
     var FORM_SELECTOR_SLIDER='#strenghtLevel';
+    var SERVER_URL='http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
+
 
     //Get the current App-instance of the global variable stack
     var App = window.App;
     
     var Truck = App.Truck; // kickon Truck constructor 
     var DataStore = App.DataStore; // kickon DataStore constructor 
+    var RemoteDataStore = App.RemoteDataStore; // kickon RemoteDataStore constructor
     var FormHandler = App.FormHandler; // kickon FormHandler constructor 
     var OrderList = App.OrderList; // kickon Orderlist constructor 
-
+    var Validation = App.Validation; // kickon Validation constructor
+   
+    
     var truckId = "Superfood-402"
+    var isOnline=true; // >> Is internet connection available
 
+    //Create new instance of Remote DataStore
+    var remoteDataStore = new RemoteDataStore(SERVER_URL);
+    var localDataStore = new DataStore();
+    var activeDataStore = null;
+
+    if (isOnline) {
+        activeDataStore = remoteDataStore;
+    }else{
+        activeDataStore = localDataStore;
+    }
 
     //Export truck object to global namespace ('window') as property
-    var foodTruck = new Truck(truckId, new DataStore());
+    var foodTruck = new Truck(truckId, activeDataStore);
+    
     window.foodTruck = foodTruck;
 
     //Create new Orderlist 
@@ -54,6 +71,10 @@
     //NOTE: Could be refactored >> pass a control-ID and event-type as parameter arguments for multiple usage (like an utility-modul ?!)
     formHandlerSlider.addOnChangeListenerHandler() 
     
+    // Adds the Constrain Validation API module to the formhandler 
+    // (Safari Browser does not support it !! --> Use help libary Webshim instead) 
+    formHandler.addInputHandler(Validation.isCompanyEmail);
+
     console.log(formHandler);
     console.log(formHandlerSlider);
 
