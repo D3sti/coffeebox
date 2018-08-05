@@ -22,7 +22,7 @@
     RemoteDataStore.prototype.add = function(key, val){
         
         // The coffee order has to be on second part of the argument (like Datastore)
-        $.post(this.serverUrl, val, function(serverResponse){
+        return $.post(this.serverUrl, val, function(serverResponse){
             console.log("RemoteDataStore.add: ");
             console.log(serverResponse);
         });
@@ -31,7 +31,7 @@
     RemoteDataStore.prototype.getAll = function(cb){
         
         // The coffee order has to be on second part of the argument (like Datastore)
-        $.get(this.serverUrl, function(serverResponse){
+        return $.get(this.serverUrl, function(serverResponse){
             console.log("RemoteDataStore.getAll: ");
             console.log(serverResponse);
             
@@ -46,7 +46,7 @@
         
         // The coffee order has to be on second part of the argument (like Datastore)
         // Create request url: http://.../api/coffeeorders/a@b.com
-        $.get(this.serverUrl + '/' + key, function(serverResponse){
+        return $.get(this.serverUrl + '/' + key, function(serverResponse){
             console.log("RemoteDataStore.get: ");
             console.log(serverResponse);
             
@@ -61,7 +61,7 @@
         
         // The coffee order has to be on second part of the argument (like Datastore)
         // Create request url: http://.../api/coffeeorders/a@b.com
-        $.ajax(this.serverUrl + '/' + key, {
+        return $.ajax(this.serverUrl + '/' + key, {
             type: 'DELETE',
             success: function(result) {
                 if (result) {
