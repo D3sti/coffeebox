@@ -9,7 +9,7 @@
         //RegEx for email validation
         //The regex obj has a test method (test(email))
         isCompanyEmail: function(email){
-            return /.+@foodtruckers\.com$/.test(email);
+            return /.+@coffeetruck\.com$/.test(email);
         }
 
     };

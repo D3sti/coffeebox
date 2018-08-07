@@ -93,7 +93,7 @@
             if (fn(emailAddress)) {
                 event.target.setCustomValidity("");
             }else{
-                message=emailAddress + " is not an authorized email address!";
+                message=emailAddress + " is not an authorized email address! (e.g. mike@coffeetruck.com)";
                 event.target.setCustomValidity(message);
             }
 

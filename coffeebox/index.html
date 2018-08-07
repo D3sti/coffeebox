@@ -34,11 +34,11 @@
         }
         form :focus:required:invalid{
             border-color: #a94444;
-            border-width: 2px
+            border-width: 1px
         }
         form :valid{
             border-color: #13b62e;
-            border-width: 2px
+            border-width: 1px
         }
 
     </style>
@@ -60,18 +60,15 @@
                 <form data-coffee-order="form">
                     <div class="form-group">
                         <label for="coffeeOrder">Coffee Order</label>
-                        <input id="coffeeOrder" type="text" class="form-control is-valid" name="coffee" autocomplete='username' 
-                                autofocus required pattern="[a-zA-Z\s]+">
+                        <input id="coffeeOrder" type="text" class="form-control" name="coffee" autocomplete='username' 
+                                placeholder="Type in your coffee name..." autofocus required pattern="[a-zA-Z\s]+">
                                 <!--RegExp: + == one or more times / \s == whitespaces -->
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
                     </div>
 
                     <div class="form-group">
                         <label for="emailInput">Email</label>
                         <input id="emailInput" type="email" class="form-control" 
-                        name="emailAddress" placeholder="dr@who.com" 
+                        name="emailAddress" placeholder="dr@coffeetruck.com" 
                         autocomplete='email' required>
                     </div>
 
