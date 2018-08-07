@@ -44,7 +44,7 @@
 
 
     //Function callback
-    // >> extFunc(inputData) need a parameter to get the input data to the truck instance amd
+    // >> extFunc(inputData) need a parameter to get the input data to the truck instance and
     // can call the createOrder function
     FormHandler.prototype.addSubmitHandler = function(extFunc){
         //console.log("Add submit handler (callback) for the form");

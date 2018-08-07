@@ -41,7 +41,7 @@
 
         //Add the coffee order to data store
         //Returns a Deferred object from the RemoteDataStore
-        return this.datastore.add(order.email, order);
+        return this.datastore.add(order.emailAddress, order);
     };
 
     //Deliver order

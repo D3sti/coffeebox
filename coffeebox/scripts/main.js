@@ -5,7 +5,7 @@
     console.log(">> main.js fired << ");
 
     var FORM_SELECTOR='[data-coffee-order="form"]';
-    var ORDERLIST_SELECTOR='[data-coffee-order="checklist"]';
+    var ORDERLIST_SELECTOR='[data-coffee-order="checkbox-list"]';
     var FORM_SELECTOR_SLIDER='#strenghtLevel';
     var SERVER_URL='http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
     //var SERVER_URL='http://coffeerun-api.herokuapp.com/api/coffeeorders'; //Error URL
@@ -20,26 +20,20 @@
     var FormHandler = App.FormHandler; // kickon FormHandler constructor 
     var OrderList = App.OrderList; // kickon Orderlist constructor 
     var Validation = App.Validation; // kickon Validation constructor
+    var Connectivity = App.Connectivity; // kickon Validation constructor
    
     
     var truckId = "Superfood-402"
-    var isOnline=false; // >> Is internet connection available
 
     //Create new instance of Remote DataStore
     var remoteDataStore = new RemoteDataStore(SERVER_URL);
     var localDataStore = new DataStore();
-    var activeDataStore = null;
-
-    if (isOnline) {
-        activeDataStore = remoteDataStore;
-    }else{
-        activeDataStore = localDataStore;
-    }
+    var browserConnectivity = new Connectivity(localDataStore, remoteDataStore);
 
     //Export truck object to global namespace ('window') as property
-    var foodTruck = new Truck(truckId, activeDataStore);
-    
-    window.foodTruck = foodTruck;
+    //Set foodtruck to local datastore as default
+    var foodTruck = new Truck(truckId, localDataStore);
+    window.foodTruck = foodTruck; 
 
     //Create new Orderlist 
     var orderList = new OrderList(ORDERLIST_SELECTOR);
@@ -57,8 +51,10 @@
     //var ftCreateOrderFnc = foodTruck.createOrder.bind(foodTruck);
 
     formHandlerSlider.updateCurrentSliderValue();
-    
-    
+
+    //Check connectivity
+    browserConnectivity.addOnIsOnlineListenerHandler();
+
     //Execute onClickHandler for the orderlist to remove a pending order item
     orderList.addClickHandler(foodTruck.deliverOrder.bind(foodTruck));// --> deliverOrder(customerID)
 
@@ -69,9 +65,9 @@
         return foodTruck.createOrder(data).then(function() {
             orderList.addOrderItem(data);
         }).catch((err) => {
-            alert('Server is unreachable - Please try again later.')
+            //alert('Server is unreachable - Please try again later.')
+            browserConnectivity.updateOfflineStatus();
         });
-        
     });
 
     //listen to the slider events "change" and "input" 
@@ -83,9 +79,18 @@
     formHandler.addInputHandler(Validation.isCompanyEmail);
 
     foodTruck.printOrders(orderList.addOrderItem.bind(orderList));
+    /* 
+    >> orderList.addOrderItem(coffeeOrder)
+    Remove existing order item
+    this.removeOrderItem(coffeeOrder.emailAddress)
+    //Create new instance of a order item
+    var orderItem = new OrderItem(coffeeOrder);
+    // Add the new item instance $element property to the checklist.
+    this.$formElement.append(orderItem.$element);
+    */
 
-    console.log(formHandler);
-    console.log(formHandlerSlider);
+    // console.log(formHandler);
+    // console.log(formHandlerSlider);
 
 
 })(window)

@@ -2,7 +2,6 @@
 (function(window){
     'use strict'
 
-
     console.log(">> orderlist.js fired << ");
 
     /*IIFE Code goes here (IIFE -- Immediately-invoked Function Expression)
@@ -18,9 +17,9 @@
         })();
 
     */
+
    
-    //var ORDERITEM_SELECTOR='[data-coffee-order="checkbox"]';
-    var ORDERITEM_SELECTOR='[data-coffee-order="checklist"]';
+    var ORDERITEM_SELECTOR='[data-coffee-order="checkbox-item"]';
 
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
@@ -47,30 +46,34 @@
 
     OrderList.prototype.addOrderItem = function (coffeeOrder){
 
+        console.log(">> OrderList.prototype.addOrderItem - remove existing item: " + coffeeOrder.emailAddress);
         //Remove existing order item
         this.removeOrderItem(coffeeOrder.emailAddress)
 
+        console.log(">> OrderList.prototype.addOrderItem - create new OrderItem(" + coffeeOrder.emailAddress + ")");
         //Create new instance of a order item
         var orderItem = new OrderItem(coffeeOrder);
 
+        console.log(">> OrderList.prototype.addOrderItem - append new OrderItem. ");
         // Add the new item instance $element property to the checklist.
         this.$formElement.append(orderItem.$element);
     };
 
 
 
-    OrderList.prototype.removeOrderItem = function (email){
+    OrderList.prototype.removeOrderItem = function (emailAddress){
 
         
         var result = this.$formElement
-        .find('[value="' + email + '"]')
+        .find('[value="' + emailAddress + '"]')
         .closest(ORDERITEM_SELECTOR)
         .remove();
 
         if (result) {
-            console.log(">> OrderList.removeOrderItem(" + email + ") | Orderlist item removed.");
+            console.log(">> OrderList.removeOrderItem(" + emailAddress + ") >> Orderlist item removed.");
+            console.log(result);
         }else{
-            console.log(">> OrderList.removeOrderItem(" + email + ") | Orderlist item does not exist!");
+            console.log(">> OrderList.removeOrderItem(" + emailAddress + ") >> Orderlist item does not exist!");
         }
     };
 
@@ -84,14 +87,15 @@
         // --> Called "event delegation" pattern
         this.$formElement.on("click","input", function (event){ 
 
-            var email = event.target.value;
+            var emailAddress = event.target.value;
             
             if (extFunc) {
-                console.log(">> OrderList.addClickHandler: extFunc is provided and will be executed (Data: " + email + ")" );
-                extFunc(email) //returns a Deferred object / main.js >> orderList.addClickHandler(foodTruck.deliverOrder.bind(foodTruck));
+                console.log(">> OrderList.addClickHandler: extFunc is provided and will be executed (Data: " + emailAddress + ")" );
+                extFunc(emailAddress) //returns a Deferred object / main.js >> orderList.addClickHandler(foodTruck.deliverOrder.bind(foodTruck));
                 .then(function(){
-                    this.removeOrderItem(email);
+                    this.removeOrderItem(emailAddress);
                 }.bind(this));
+                
             }else{
                 console.log(">> OrderList.addClickHandler: extFunc is not provided - Submit callback is not available!");
             }
@@ -102,7 +106,7 @@
     function OrderItem(coffeeOrder){
         
         var $div = $('<div></div>', {
-            'data-coffee-order': 'checkbox',
+            'data-coffee-order': 'checkbox-item',
             'class': 'checkbox'
         });
 
