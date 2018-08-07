@@ -60,15 +60,25 @@
             console.log(inputData);
 
             if (extFunc) {
+
                 console.log(">> addSubmitHandler: extFunc is provided and will be executed");
-                extFunc(inputData);
+                extFunc(inputData) // main.formHandler.addSubmitHandler >> foodTruck.createOrder
+                .then(function(){ //Only reset the form, if the deferred object is fullfilled
+                    
+                    // IMPORTANT: If you register a callback with '.then', the callback is in a new scope !!
+                    // So the 'this' keyword /object has no value --> bind the scope to hte 'Formhandler' instance
+                    this.reset();
+                    this.elements[0].focus();
+
+                }.bind(this));
+
             }else{
                 console.log(">> addSubmitHandler: extFunc is not provided - Submit callback is not available!");
             }
             
-            //Reset the form elements
-            this.reset();
-            this.elements[0].focus();
+           
+            //this.reset();
+            //this.elements[0].focus();
         })
     };
 

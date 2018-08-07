@@ -37,40 +37,45 @@
 
     //Create order
     Truck.prototype.createOrder = function(order){
-        console.log("Adding order " + order.coffee + " for " + order.email);
+        console.log("Adding order " + order.coffee + " for " + order.emailAddress);
 
-        //Add drink to datastore object
-        this.datastore.add(order.email, order);
+        //Add the coffee order to data store
+        //Returns a Deferred object from the RemoteDataStore
+        return this.datastore.add(order.email, order);
     };
 
-
-    
     //Deliver order
     Truck.prototype.deliverOrder = function(customerId){
         console.log("Delivering order for " + customerId);
 
-        //Add drink to datastore object
-        this.datastore.remove(customerId);
+        //Remove the coffee order of the data store
+        //Returns a Deferred object from the RemoteDataStore
+        return this.datastore.remove(customerId);
     };
 
-
     //Print orders
-    Truck.prototype.printOrders = function(){
+    Truck.prototype.printOrders = function(printFnc){  //printFnc >> passed in all Data of current coffee orders
 
-        //Get all customers (orders) listed in datastore
-        var customerIdObjects = this.datastore.getAll();
+        // Returns a Deferred object
+        return this.datastore.getAll()
+        .then(function(orders){ // expected orders from deferred obj >> this.datastore.getAll()
 
-        //Get only the keys of the object (customer ID´s)
-        var customerIdArray = Object.keys(customerIdObjects);
+            //Get only the keys of the object (customer ID´s)
+            var customerIdArray = Object.keys(orders);
 
-        //Print header + each pending customer order 
-        console.log(" Truck #" + this.truckId + " has pending orders:");
+            //Print header + each pending customer order 
+            console.log(" Truck #" + this.truckId + " has pending orders:");
 
-        // ATTENTION - 'forEach' us a anoymous function !!!
-        customerIdArray.forEach(function(id){
-            console.log(this.datastore.get(id));
-        }.bind(this)); 
-        
+            // ATTENTION - 'forEach' us a anoymous function !!!
+            customerIdArray.forEach(function(id){
+                if (printFnc) {
+                    console.log(orders[id]); //allData[id]
+                }
+            }.bind(this)); 
+
+        }.bind(this));
+
+
         /*
             Passing the current 'Truck' object (this) as the owner object callback-fnc of that anonymous function!!
             Otherwise the inner "anonymous" function has an undefined 'owner' object callback-fnc as default!! --> ERROR on bind() call
@@ -84,8 +89,6 @@
         */
     };
 
-
-    //Set Truck object
     App.Truck = Truck;
     window.App = App;
 

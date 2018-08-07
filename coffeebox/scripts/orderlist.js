@@ -85,11 +85,13 @@
         this.$formElement.on("click","input", function (event){ 
 
             var email = event.target.value;
-            this.removeOrderItem(email);
-
+            
             if (extFunc) {
                 console.log(">> OrderList.addClickHandler: extFunc is provided and will be executed (Data: " + email + ")" );
-                extFunc(email);
+                extFunc(email) //returns a Deferred object / main.js >> orderList.addClickHandler(foodTruck.deliverOrder.bind(foodTruck));
+                .then(function(){
+                    this.removeOrderItem(email);
+                }.bind(this));
             }else{
                 console.log(">> OrderList.addClickHandler: extFunc is not provided - Submit callback is not available!");
             }

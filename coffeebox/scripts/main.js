@@ -8,6 +8,7 @@
     var ORDERLIST_SELECTOR='[data-coffee-order="checklist"]';
     var FORM_SELECTOR_SLIDER='#strenghtLevel';
     var SERVER_URL='http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
+    //var SERVER_URL='http://coffeerun-api.herokuapp.com/api/coffeeorders'; //Error URL
 
 
     //Get the current App-instance of the global variable stack
@@ -22,7 +23,7 @@
    
     
     var truckId = "Superfood-402"
-    var isOnline=true; // >> Is internet connection available
+    var isOnline=false; // >> Is internet connection available
 
     //Create new instance of Remote DataStore
     var remoteDataStore = new RemoteDataStore(SERVER_URL);
@@ -63,8 +64,14 @@
 
     //Execute functions on the addSubmitHandler
     formHandler.addSubmitHandler(function(data){
-        foodTruck.createOrder(data);
-        orderList.addOrderItem(data);
+
+        //Use Deferred object function '.then' for chaining callbacks ($ajax requests)
+        return foodTruck.createOrder(data).then(function() {
+            orderList.addOrderItem(data);
+        }).catch((err) => {
+            alert('Server is unreachable - Please try again later.')
+        });
+        
     });
 
     //listen to the slider events "change" and "input" 
@@ -74,6 +81,8 @@
     // Adds the Constrain Validation API module to the formhandler 
     // (Safari Browser does not support it !! --> Use help libary Webshim instead) 
     formHandler.addInputHandler(Validation.isCompanyEmail);
+
+    foodTruck.printOrders(orderList.addOrderItem.bind(orderList));
 
     console.log(formHandler);
     console.log(formHandlerSlider);
