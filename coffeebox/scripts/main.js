@@ -4,10 +4,10 @@
 
     console.log(">> main.js fired << ");
 
-    var FORM_SELECTOR='[data-coffee-order="form"]';
-    var ORDERLIST_SELECTOR='[data-coffee-order="checkbox-list"]';
-    var FORM_SELECTOR_SLIDER='#strenghtLevel';
-    var SERVER_URL='http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
+    const FORM_SELECTOR='[data-coffee-order="form"]';
+    const ORDERLIST_SELECTOR='[data-coffee-order="checkbox-list"]';
+    const FORM_SELECTOR_SLIDER='#strenghtLevel';
+    const SERVER_URL='http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
     //var SERVER_URL='http://coffeerun-api.herokuapp.com/api/coffeeorders'; //Error URL
 
 

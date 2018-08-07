@@ -19,7 +19,7 @@
     */
 
    
-    var ORDERITEM_SELECTOR='[data-coffee-order="checkbox-item"]';
+    const ORDERITEM_SELECTOR='[data-coffee-order="checkbox-item"]';
 
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
