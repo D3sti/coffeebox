@@ -5,37 +5,46 @@
 
     console.log(">> datastore.js fired << ");
 
-    /*IIFE Code goes here (IIFE -- Immediately-invoked Function Expression)
-        
-        A IIFE always creates a "Scope" and variables and functions are not visible from outside the scope
-        Outcome --> like a private scope / encapsulation !! Best Practice !!
-
-        // >> IMPORTANT >> 
-        // an outside defined variable with the same name definition will be "overruled" by the IIFE internal variable, which has the same name !!
-
-        (function () {
-            //...
-        })();
-
-    */
-
     //window will be injected as parameter
     var App = window.App || {}; // {} == new object
-
-    
+    var Promise = window.Promise;
 
     //Constructor
     function DataStore(){
         this.data = {}; //Property object
     }
 
-    //
-    // ## Modification functions ## 
-    //
+    //Helper function - PromiseResolveWith()
+    function promiseResolvedWith(value){
+        var promise = new Promise(function(resolve, reject){
+            resolve(value);
+        });
+        return promise;
+    }
 
     //Add value to same key will overwrite the old value
     DataStore.prototype.add = function(key, value) {
+        
         this.data[key] = value;
+
+        //Return promise object (helper fnc)
+        return promiseResolvedWith(null);
+
+        /*
+        var promise = new Promise(function(resolve, reject){
+            //resolve function change promise obj to status: 'fullfilled'
+            //reject function change promise obj to status: 'rejected'
+
+            this.data[key] = value;
+
+            resolve(null); 
+            // 'null' because >> Adding a value to datastore does 
+            //not produce a value, so there is nothing to resolve 
+
+        }.bind(this));
+        return promise;
+        */
+
     };
 
     DataStore.prototype.update = function(key, value) {
@@ -45,22 +54,24 @@
         }else{
             console.log("key: " + key + " not found")
         }
-        
+        //Return promise object (helper fnc)
+        return promiseResolvedWith(null);
     };
 
     DataStore.prototype.remove = function(key) {
         delete this.data[key]; //delete removes a key/value pair of an object !!
+        //Return promise object (helper fnc)
+        return promiseResolvedWith(null);
     };
 
-    //
-    // ## Return functions ## 
-    //
     DataStore.prototype.get = function (key) {
-        return this.data[key];
+        //Return promise object (helper fnc)
+        return promiseResolvedWith(this.data[key]);
     };
 
     DataStore.prototype.getAll = function () {
-        return this.data;
+        //Return promise object (helper fnc)
+        return promiseResolvedWith(this.data);
     };
 
 
