@@ -54,6 +54,11 @@
 
             var inputData = {};
             $(this).serializeArray().forEach(item => {
+                
+                if (item.value == undefined) {
+                    item.value = ""
+                }
+
                 inputData[item.name] = item.value;
                 console.log(item.name + " has the value: " + item.value);
             });
