@@ -71,8 +71,15 @@
             orderList.addOrderItem(data);
 
         }).catch((err) => {
-            //alert('Server is unreachable - Please try again later.')
+            
             browserConnectivity.updateOfflineStatus();
+
+            return foodTruck.createOrder(data).then(function() {
+                orderList.addOrderItem(data);
+            }).catch((err) => {
+                alert('Pending orders cannot be saved - Please try again later.')
+            });
+
         });
     });
 
