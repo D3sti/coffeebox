@@ -3,7 +3,6 @@
     'use strict'
 
 
-    
     console.log(">> orderlist.js fired << ");
 
     /*IIFE Code goes here (IIFE -- Immediately-invoked Function Expression)
@@ -66,6 +65,17 @@
             $badgeOrderCount.text(currCount);
         }
     }
+
+    /*
+    var coffeeOrderExample =  {
+
+        coffee: "Caramelyzer",
+        emailAddress: "AMB@coffeetruck.com",
+        size: "Grande",
+        flavour: "Caramel",
+        strenght: "39"
+    };
+    */
 
     OrderList.prototype.addOrderItem = function (coffeeOrder){
 
@@ -173,13 +183,10 @@
        var $list = $('<ul></ul>', {
             'class' : 'list-group mb-3',
             'data-coffee-order' : 'checkbox-item'
-            
         });
-
         var $listitem = $('<li></li>', {
             'class' : 'list-group-item d-flex justify-content-between 1h-condensed'
         });
-
         var $divDescr = $('<div></div>', {
         });
         var $coffeename = $('<h5>' + coffeeOrder.coffee + '</h5>', {
@@ -188,15 +195,12 @@
         var $email = $('<small>' + coffeeOrder.emailAddress + '</small>', {
             'class' : 'text-muted'
         });
-      
-
         var $receipeHeader = $('<div></div>', {
            'class' : 'list-group'
         });
         var $flavourHeader = $('<h6>Flavour</h6>', {
             'class' : 'text-muted "list-group-item-heading d-flex justify-content-between'
         });
-
         if(coffeeOrder.flavour ==="")
         {
             coffeeOrder.flavour = "No flavour shot"
@@ -212,32 +216,19 @@
         var $strenghtText = $('<p>' + coffeeOrder.strenght + '</p>', {
             'class' : 'text-muted "list-group-item-text d-flex justify-content-between'
         });
-
-
         var $sizeHeader = $('<h6>Size</h6>', {
             'class' : 'text-muted "list-group-item-heading d-flex justify-content-between'
         });
         var $sizeText = $('<p>' + coffeeOrder.size + '</p>', {
             'class' : 'text-muted "list-group-item-text d-flex justify-content-between'
         });
-        var $sizeSpan = $('<span>' + coffeeOrder.size + '</span>', {
-            'class' : 'text-muted'
-        });
-
         var $deliveredButton = $('<button class="btn btn-outline-success btn-sm" type="button" value="' + coffeeOrder.emailAddress + '"><i class="material-icons">done</i></button>');
-
-        //<button type="button" class="btn btn-outline-success btn-sm">
-        //<i class="material-icons">done</i>
-        //</button>
-
 
         //Append all variable fields together (inner - out)
         $list.append($listitem);
         $listitem.append($divDescr);
-
         $divDescr.append($coffeename);
         $divDescr.append($email);
-        
         $divDescr.append($receipeHeader);
         $receipeHeader.append($flavourHeader);
         $receipeHeader.append($flavourText);
@@ -245,12 +236,8 @@
         $receipeHeader.append($strenghtText);
         $receipeHeader.append($sizeHeader);
         $receipeHeader.append($sizeText);
-
         $receipeHeader.append($deliveredButton);
-        //$deliveredButton.append($deliveredButtonGlyph);
         
-        
-
         //Add it to html element: data-coffee-order="checkbox-list"
         this.$element = $list;
     }

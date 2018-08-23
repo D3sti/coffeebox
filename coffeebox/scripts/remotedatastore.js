@@ -16,8 +16,7 @@
         this.serverUrl = url;
     }
     
-
-    //PROTOTYPES
+    
 
     RemoteDataStore.prototype.add = function(key, val){
         
@@ -27,6 +26,21 @@
             console.log(serverResponse);
         });
     }
+
+    RemoteDataStore.prototype.remove = function(key){
+        
+        // The coffee order has to be on second part of the argument (like Datastore)
+        // Create request url: http://.../api/coffeeorders/a@b.com
+        return $.ajax(this.serverUrl + '/' + key, {
+            type: 'DELETE',
+            success: function(result) {
+                if (result) {
+                    console.log("RemoteDataStore.remove: " + key);
+                    console.log(result);
+                }
+            }
+    });
+
 
     RemoteDataStore.prototype.getAll = function(cb){
         
@@ -57,19 +71,7 @@
     }
 
 
-    RemoteDataStore.prototype.remove = function(key){
-        
-        // The coffee order has to be on second part of the argument (like Datastore)
-        // Create request url: http://.../api/coffeeorders/a@b.com
-        return $.ajax(this.serverUrl + '/' + key, {
-            type: 'DELETE',
-            success: function(result) {
-                if (result) {
-                    console.log("RemoteDataStore.remove: " + key);
-                    console.log(result);
-                }
-            }
-        });
+    
 
         
     }

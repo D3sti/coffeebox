@@ -9,21 +9,19 @@
     const FORM_SELECTOR_SLIDER='#strenghtLevel';
     const SERVER_URL='http://coffeerun-v2-rest-api.herokuapp.com/api/coffeeorders';
     //var SERVER_URL='http://coffeerun-api.herokuapp.com/api/coffeeorders'; //Error URL
-
+    var truckId = "Superfood-402"
 
     //Get the current App-instance of the global variable stack
     var App = window.App;
     
-    var Truck = App.Truck; // kickon Truck constructor 
-    var DataStore = App.DataStore; // kickon DataStore constructor 
-    var RemoteDataStore = App.RemoteDataStore; // kickon RemoteDataStore constructor
-    var FormHandler = App.FormHandler; // kickon FormHandler constructor 
-    var OrderList = App.OrderList; // kickon Orderlist constructor 
-    var Validation = App.Validation; // kickon Validation constructor
-    var Connectivity = App.Connectivity; // kickon Validation constructor
-   
-    
-    var truckId = "Superfood-402"
+    //Kickon all IIFE constructors
+    var Truck = App.Truck;
+    var DataStore = App.DataStore;
+    var RemoteDataStore = App.RemoteDataStore;
+    var FormHandler = App.FormHandler; 
+    var OrderList = App.OrderList;
+    var Validation = App.Validation;
+    var Connectivity = App.Connectivity; 
 
     //Create new instance of Remote DataStore
     var remoteDataStore = new RemoteDataStore(SERVER_URL);
@@ -52,23 +50,32 @@
 
     formHandlerSlider.updateCurrentSliderValue();
 
-    //Check connectivity
+    //Add connectivity EventListener
     browserConnectivity.addOnIsOnlineListenerHandler();
 
-    //Execute onClickHandler for the orderlist to remove a pending order item
+    //Register onClickHandler for the orderlist to remove a pending order item
     orderList.addClickHandler(foodTruck.deliverOrder.bind(foodTruck));// --> deliverOrder(customerID)
 
-    //Execute functions on the addSubmitHandler
+    //Register functions on the addSubmitHandler
     formHandler.addSubmitHandler(function(data){
 
+        //Before order transaction, check connectivity
+        if(window.navigator.onLine) { // true|false
+            browserConnectivity.updateOnlineStatus();
+        }else{
+            browserConnectivity.updateOfflineStatus();
+        }
+        
         //Use Deferred object function '.then' for chaining callbacks ($ajax requests)
         return foodTruck.createOrder(data).then(function() {
             orderList.addOrderItem(data);
+
         }).catch((err) => {
             //alert('Server is unreachable - Please try again later.')
             browserConnectivity.updateOfflineStatus();
         });
     });
+
 
     //listen to the slider events "change" and "input" 
     //NOTE: Could be refactored >> pass a control-ID and event-type as parameter arguments for multiple usage (like an utility-modul ?!)

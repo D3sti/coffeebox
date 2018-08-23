@@ -64,8 +64,7 @@
         
         //Return promise object (helper fnc)
         //return promiseResolvedWith(null);
-
-    };  
+    };
 
     App.Connectivity = Connectivity;
     window.App = App;

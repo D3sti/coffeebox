@@ -40,7 +40,6 @@
         console.log("Adding order " + order.coffee + " for " + order.emailAddress);
 
         //Add the coffee order to data store
-        //Returns a Deferred object from the RemoteDataStore
         return this.datastore.add(order.emailAddress, order);
     };
 
@@ -52,6 +51,8 @@
         //Returns a Deferred object from the RemoteDataStore
         return this.datastore.remove(customerId);
     };
+
+
 
     //Print orders
     Truck.prototype.printOrders = function(printFnc){  //printFnc >> passed in all Data of current coffee orders
